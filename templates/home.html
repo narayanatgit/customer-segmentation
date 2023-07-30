@@ -1,0 +1,308 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <title>Dashboard Template for Bootstrap</title>
+
+  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+ 
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV5fV4avi_kuFb73bsLrVyqCPAaJvvjmCrCg&usqp=CAU" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+          Customer Segmentation
+        </a>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <button class="nav-link active" onClick="doAction()" >
+                  <span data-feather="home"></span>
+                  Introduction 
+                </button>
+              </li>
+              <li class="nav-item">
+                <button id="EDA" class="nav-link" onClick="EDA()" >
+                  <span data-feather="file"></span>
+                  EDA
+                </button>
+              </li>
+              <li id="pre" class="nav-item">
+                <button class="nav-link" >
+                  <span data-feather="shopping-cart"></span>
+                  Pre-processing
+                </button>
+              </li>
+              <li class="nav-item">
+                <button id="RFM" class="nav-link" >
+                  <span data-feather="users"></span>
+                  RFM-Score
+                </button>
+              </li>
+              <li class="nav-item">
+                <button id="kpre" class="nav-link" >
+                  <span data-feather="activity"></span>
+                  K means  
+                </button>
+              </li>
+              <li class="nav-item">
+                <button id="clu" class="nav-link" >
+                  <span data-feather="activity"></span>
+                 clustering  
+                </button>
+              </li>
+              <li class="nav-item">
+                <button id="rmclu" class="nav-link" >
+                  <span data-feather="activity"></span>
+                 RM K-means 
+                </button>
+              </li>
+              <li class="nav-item">
+                <button id="ana" class="nav-link" >
+                  <span data-feather="cpu"></span>
+                 Analysis 
+                </button>
+              </li>
+              <li class="nav-item">
+                <button id="reports" class="nav-link" >
+                  <span data-feather="bar-chart-2"></span>
+                  Reports
+                </button>
+              </li>
+              <li class="nav-item">
+                <button id="ass" class="nav-link" >
+                  <span data-feather="box"></span>
+                  Association rules
+                </button>
+              </li>
+            </ul>
+          
+           </nav>
+          
+        <main id="main" role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+         
+         
+         
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+   
+   
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+      function doAction() {
+          $('#main').html("<h1>Customer Segmentation</h1><br> <h4>Customer segmentation is the process of dividing customers into groups based on common characteristics so companies can market to each group effectively and appropriately. In business-to-business marketing, a company might segment customers according to a wide range of factors, including: Industry</h4>")
+      }
+     
+       
+      $(document).ready(function() {
+            $("#EDA").click(function() {
+                $.ajax({
+                    url: "/table",
+                    type: "GET",
+                    success: function(table) {
+                   
+    $("#main").html('<h1>Head</h1>'+table.head+'<br><h1>Tail</h1>'+table.tail+'<br><h1>shape</h1>'+table.shape+'<br><h1>describe</h1>'+'<div style=border-collapse: collapse,text-align: center>'+table.des+'</div>'+'<br><h1>Null values</h1>'+table.info);
+                        
+                        
+                    }
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            $("#pre").click(function() {
+                $.ajax({
+                    url: "/pre",
+                    type: "GET",
+                    success: function(pre) {
+                   
+    $("#main").html('<h1>Pre-processing</h1>'+'<br><h3>Total no. of rows in the dataset </h3>'+pre.total+'<br><h3>No of duplicates </h3>'+pre.dup+'<br><h3>No. of customers </h3>'+pre.nocus+'<br><h3>After preprocessing </h3>'+pre.afterpre+'<br><h3>No of items</h3>'+pre.noofitems);
+                        
+                        
+                    }
+                });
+            });
+        });
+        $(document).ready(function() {
+            $("#RFM").click(function() {
+                $.ajax({
+                    url: "/rfm",
+                    type: "GET",
+                    success: function(rfm) {
+                   
+    $("#main").html('<h1>RFM Score</h1><br>'+'<h3>Maximum amount:</h3>'+rfm.max+'<br><h3>reference date:</h3>'+rfm.refer+'<br><h3>Last date in the Dataset:</h3>'+rfm.maxd+'<br>'+'<div>'+rfm.fre+'</div>');
+                        
+                        
+                    }
+                });
+            });
+        });
+        $(document).ready(function() {
+            $("#kpre").click(function() {
+                $.ajax({
+                    url: "/kmeans",
+                    type: "GET",
+                    success: function(kmean) {
+                   
+                      var html='<div><h1>Transformation</h1>'+
+                                 '<h4>skewness(before)</h4>'+kmean.skew1+'<br>'+kmean.skew2+'<br>'+kmean.skew3+'<br><br><br>'+
+                                 '    <img src="{{url_for("static",filename="recencybef.jpg")}}" />'+'<br><br>'+
+                                 '    <img src="{{url_for("static",filename="frebef.PNG")}}" />'+'<br><br>'+
+                                 '    <img src="{{url_for("static",filename="price.PNG")}}" />'+'<br><br><br><br>'+
+                                 '<h4>skewness(after)</h4>'+kmean.skew1r+'<br>'+kmean.skew2r+'<br>'+kmean.skew3r+'<br><br><br>'+
+                                 '    <img src="{{url_for("static",filename="renceyaf.PNG")}}" />'+'<br><br>'+
+                                 '    <img src="{{url_for("static",filename="freaf.jpg")}}" />'+'<br><br>'+
+                                 '    <img src="{{url_for("static",filename="priceaf.PNG")}}" />'+'<br><br><br><br>'+
+                                '  <h1>Standardization</h1><br>'+kmean.std+'<br><br><br><br>'+
+                                  ' <h1>Outliers removal</h1>'+'<br><br>'+'<h4>before removing</h4>'+'<br><br>'+
+                                  '    <img src="{{url_for("static",filename="recbef.PNG")}}" />'+'<br><br>'+
+                                 '    <img src="{{url_for("static",filename="freobef.PNG")}}" />'+'<br><br>'+
+                                 '    <img src="{{url_for("static",filename="pricebef.PNG")}}" />'+'<br><br><br><br>'+
+                                  '  <h4>after removing outliers</h4>'+'<br><br>'+
+                                  '  <img src="{{url_for("static",filename="recaft.PNG")}}" />'+'<br><br>'+
+                                 '    <img src="{{url_for("static",filename="freaaft.PNG")}}" />'+'<br><br>'+
+                                 '    <img src="{{url_for("static",filename="priceaft.PNG")}}" />'+'<br><br><br><br>'+'<br><br>'+
+        
+                                 '<h4>no of outliers</h4>'+kmean.total+'<br><br<br>'+
+                                 '<h1>RFM values for clustering</h1><br><br>'+kmean.after +'</div>'
+                          
+                            
+    $("#main").html(html);
+                        
+                        
+                    }
+                });
+            });
+        })
+        $(document).ready(function() {
+            $("#clu").click(function() {
+                $.ajax({
+                    url: "/cluster",
+                    type: "GET",
+                    success: function(cl) {
+                   var html='<div><h1>Clustering</h1><br><h1>k=3</h1>'+'<br>'+
+                         ' <h4>frequency vs montary</h4>'+'<br><br>'+
+                          '    <img src="{{url_for("static",filename="k=3 fre.PNG")}}" />'+'<br><br>'+
+                          ' <h4>Recency vs montary</h4>'+'<br><br>'+
+                            '    <img src="{{url_for("static",filename="k=3 rec.PNG")}}" />'+'<br><br>'+
+                            cl.data1+'<br><br>'+
+                            '<h1>k=5</h1>'+'<br>'+
+                            ' <h4>frequency vs montary</h4>'+'<br><br>'+
+                          '    <img src="{{url_for("static",filename="k=5 fre.PNG")}}" />'+'<br><br>'+
+                          ' <h4>Recency vs montary</h4>'+'<br><br>'+
+                            '    <img src="{{url_for("static",filename="k=5 rec.PNG")}}" />'+'<br><br>'+
+                            '<h1>silhouette_score</h1><br><br>'+
+                            '<h4>k=3</h4><br>'+cl.sil1+'<br>'+
+                            '<h4>k=5</h4><br>'+cl.sil2+'<br><br><br>'+
+                            '<img src="{{url_for("static",filename="sih3.PNG")}}" />'+'<br><br>'+
+                            '<img src="{{url_for("static",filename="shil5.PNG")}}" />'+'<br><br>'+
+                             '</div>'
+    $("#main").html(html);
+                        
+                        
+                    }
+                });
+            });
+        });
+        $(document).ready(function() {
+            $("#rmclu").click(function() {
+                $.ajax({
+                    url: "/rm",
+                    type: "GET",
+                    success: function(rm) {
+                   var html='<h1>RM Kmeans</h1><br><br>'+
+                             '<h4>Frequency vs Monetary</h4>'+'<br><br>'+
+                             '<img src="{{url_for("static",filename="k=3 frerm.PNG")}}" />'+'<br><br>'+ rm.rm1+'<br><br>'+
+                             '<h4>Recency vs Monetary</h4>'+'<br><br>'+
+                             '<img src="{{url_for("static",filename="k=3 recrm.PNG")}}" />'+'<br><br>'+rm.rm2
+
+    $("#main").html(html);
+                        
+                        
+                    }
+                });
+            });
+        });
+        
+        $(document).ready(function() {
+            $("#reports").click(function() {
+                $.ajax({
+                    url: "/rep",
+                    type: "GET",
+                    success: function(ana) {
+                   
+                      var html='<h1>Results</h1><br><br><br>'+
+              '    <img src="{{url_for("static",filename="fre.PNG")}}" />'+'<br><br>'+
+                            '    <img src="{{url_for("static",filename="rfre.PNG")}}" />'+'<br><br>'+
+                                 '    <img src="{{url_for("static",filename="pricere.PNG")}}" />'+'<br><br><br><br>'
+                        
+                     $("#main").html(html);
+                        
+                        
+                    }
+                });
+            });
+        });
+        $(document).ready(function() {
+            $("#ana").click(function() {
+                $.ajax({
+                    url: "/ana",
+                    type: "GET",
+                    success: function(ana) {
+                    var html='<h1>Comparison of algorithm</h1><br><br><br>'+
+                               '<table style="border:1px solid black"><tr> <th>Algorithm</th> <th>Iterations</th> <th>Time</th> <th>Cluster compactness</th></tr>'+
+                                '<tr> <td>K-means</td> <td>'+ana.it1+'</td> <td>'+ ana.ktime+'</td> <td>'+ana.sil1+'</td></tr>'+
+                                '<tr> <td>RM k-means</td> <td>'+ana.it2+'</td> <td>'+ ana.rmtime+'</td> <td>'+ana.sil2+'</td></tr></table>'
+                     $("#main").html(html);
+                        
+                        
+                    }
+                });
+            });
+        });
+        $(document).ready(function() {
+            $("#ass").click(function() {
+              
+                      var html="<a href=http://localhost:8501/><h1>Click here to view the rules </h1></a>"
+                     $("#main").html(html);
+                        
+                        
+                    
+                });
+            });
+    
+    </script>
+
+  </body>
+</html>
